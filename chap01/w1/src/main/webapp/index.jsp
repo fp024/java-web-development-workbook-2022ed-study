@@ -12,8 +12,8 @@
     <a href="hello-servlet">Hello Servlet</a>
   </li>
   <li>
-    <h4>p39.</h4>
-    <a href="/calc/input.jsp">/calc/input.jsp</a>
+    <h4>계산기</h4>
+    <a href="/calc/input">/calc/input</a>
   </li>
 </ul>
 
