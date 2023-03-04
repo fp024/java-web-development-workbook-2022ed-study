@@ -35,14 +35,15 @@
   * Gradle
     * 전반부에서는 IntelliJ 에서 JavaEE 프로젝트 생성하시는 것 같은데... 지금은 Gradle + Gretty 환경에서도 JavaEE 프로젝트를 잘 구성할 수 있는 방법을 알고 있으므로 모든 예제에 대해 Gradle 빌드 가능한 프로젝트로 만들면 되겠다.
       * Tomcat에 상세한 설정이 들어가도 대응이 됨..
-        
+    * 
 
 * **WAS** 
 
   * Tomcat
-    * Gretty로 Tomcat 10.1.x을 임베디드 서버로 실행시켜 사용하자!
+    * Gretty로 Tomcat 10.1.x을 임베디드 서버로 실행시켜 사용하자! 려고 했는데....😓
+      * 1장 좀 읽다보니.. IntelliJ에서 Tomcat 연동하니... 매우 편함..👍 그래도 IntelliJ없는 환경에서도 쉽게 사용할 수 있도록 Gretty 설정도 추가해두었다. 😄
     * 실제 Tomcat에 연습이 필요할 경우에는 war로 배포해서 배치 시켜보자.
-      
+    
 
 * **DB**
 

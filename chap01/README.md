@@ -215,6 +215,83 @@
 
 
 
+## 1.4 HttpServlet
+
+* ...
+
+#### HttpServlet의 라이프 사이클
+
+* ...
+
+* ✨ 동일한 주소의 서블릿 클래스의 인스턴스는 딱 하나만 생긴다. (해시가 같음.)
+
+  ```
+  09:48:27.570 [http-nio-8080-exec-59] INFO  org.fp024.w1.SampleServlet - doGet... org.fp024.w1.SampleServlet@7c2b4d4f
+  09:49:00.810 [http-nio-8080-exec-61] INFO  org.fp024.w1.SampleServlet - doGet... org.fp024.w1.SampleServlet@7c2b4d4f
+  09:49:06.196 [http-nio-8080-exec-62] INFO  org.fp024.w1.SampleServlet - doGet... org.fp024.w1.SampleServlet@7c2b4d4f
+  ...
+  ```
+
+
+
+### HttpServletRequest의 주요 기능
+
+* ...
+
+#### getParamemter()
+
+* ...
+
+#### getParameterValues()
+
+* ...
+
+#### setAttribute()
+
+* ...
+
+#### RequestDispatcher()
+
+* ...
+* 일단은 forward()만 써봤는데...
+  * forward(): 현재까지의 모든 응답(Response) 내용은 무시하고 JSP가 작성하는 내용만을 브라우저로 전달
+  * include(): 지금까지 만들어진 응답 내용 + JSP가 만든 내용을브라우저로 전달.
+
+
+
+## HttpServletResponse의 주요 기능
+
+* ...
+
+#### sendRedirect()
+
+* ...
+
+### 실습01 와이어 프레임의 구현
+
+* 기능 / 동작방식 / 컨트롤러 / 컨트롤러 URL  / JSP 표만들기...
+* ✨ 이런 식으로 표만들어보는게 중요함.
+
+
+
+### 실습02 TodoListController 구현
+
+* ...
+
+
+
+### 실습03 TodoRegisterController의 구현
+
+* ...
+
+
+
+
+
+
+
+
+
 
 
 
@@ -237,4 +314,27 @@
 
 ## 정오표
 
-* 
+* p16. 다이어그램에서 `데이터베이스`와 `서버`의 위치가 바뀌어야할 것 같다.
+* p60. 다이어그램에서 2번째 상속 단계의 클래스 명이 Generic Servlet이 되야함.
+
+
+
+
+
+## 기타
+
+#### HtmlUnitMockHttpServletRequest
+
+* ServletRequest 상속 구조에 `HtmlUnitMockHttpServletRequest` 가 보여서 보니까 Spring Test에서 HTML구조를 테스트 할 수 있나보다.. 이거는 스프링 장 넘어갈 때, 진행해보자.
+
+  * https://docs.spring.io/spring-test-htmlunit/docs/current/reference/html5/
+
+  
+
+#### Tomcat 연동해서 실행시 로그 한글 깨짐
+
+![image-20230304105719396](doc-resources/image-20230304105719396.png)
+
+Gretty에선 따로 저 옵션을 붙이진 않았었는데... IntelliJ 연동 톰켓의 `Tomcat Catalina 로그` 항목에서 내가 컨트롤러에 정의한 로깅 내용중 한글이 깨져서 추가해보았다..
+
+추가 후 한글안 깨지지 않았다.

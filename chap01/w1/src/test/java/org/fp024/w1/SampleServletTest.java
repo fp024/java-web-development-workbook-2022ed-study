@@ -6,7 +6,7 @@ import org.fp024.test.support.MockHttpServletTestSupport;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 
-class MyServletTest extends MockHttpServletTestSupport<MyServlet> {
+class SampleServletTest extends MockHttpServletTestSupport<SampleServlet> {
 
   @Test
   void testDoGet() throws Exception {
@@ -16,17 +16,18 @@ class MyServletTest extends MockHttpServletTestSupport<MyServlet> {
         () -> servlet.doGet(request, response),
         () -> {
           assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-          assertThat(response.getContentAsString()).contains("<h1>MyServlet</h1>");
+          assertThat(response.getContentAsString()).contains(
+              String.format("<h4>현재 서블릿 클래스의 this: %s<h4>", servlet));
         });
   }
 
   @Override
-  protected Class<MyServlet> getServletClass() {
-    return MyServlet.class;
+  protected Class<SampleServlet> getServletClass() {
+    return SampleServlet.class;
   }
 
   @Override
   protected String getServletPath() {
-    return "/my";
+    return "/sample";
   }
 }
