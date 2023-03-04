@@ -6,25 +6,29 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.fp024.w1.todo.dto.TodoDTO;
 import org.fp024.w1.todo.service.TodoService;
 
 @Slf4j
-@WebServlet(name = "todoListController", value = "/todo/list")
-public class TodoListController extends HttpServlet {
+@WebServlet(name = "todoReadController", value = "/todo/read")
+public class TodoReadController extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    LOGGER.info("/todo/list");
+    LOGGER.info("/todo/read");
 
-    List<TodoDTO> dtoList = TodoService.INSTANCE.getList();
+    // /todo/read?tno=123
+    Long tno = Long.parseLong(request.getParameter("tno"));
 
-    request.setAttribute("list", dtoList);
+    TodoDTO dto = TodoService.INSTANCE.get(tno);
 
-    request.getRequestDispatcher("/WEB-INF/todo/list.jsp") //
+    request.setAttribute("dto", dto);
+
+    request.getRequestDispatcher("/WEB-INF/todo/read.jsp") //
         .forward(request, response);
   }
+
+
 }

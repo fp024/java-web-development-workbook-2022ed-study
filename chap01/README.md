@@ -63,7 +63,7 @@
 
 * 책에서도 모두 배포를 누르라고 한다.
 
-  ![image-20230304060023686](doc-resources\image-20230304060023686.png)
+  ![image-20230304060023686](doc-resources/image-20230304060023686.png)
 
   배포는 해야함.
 
@@ -286,29 +286,98 @@
 
 
 
+## 1.5 모델 (Model)
+
+* ...
+
+### 모델과 3티어
+
+* ....
+
+#### DTO (Data Trasfer Object)
+
+* ...
+
+#### 서비스 객체
+
+* ...
+
+### 실습 04 TodoService 클래스
+
+* 싱글톤을 쉽게 구현하기 위해서 enum을 활용한 것은 새롭다. ✨
+  * 다른 스터디에서 Gson 헬퍼 싱글톤 만드려고, 아래와 같은식으로 하기도 했는데...
+    * https://github.com/fp024/learning-spring-web-project-by-code/blob/7c0d7dbe4e8efa261e669e9397b40700b3c3b482/part-last/my-board-spring5/src/main/java/org/fp024/util/GsonHelper.java
 
 
 
+### 컨트롤러에서 모델 처리하기
+
+* ...
+
+#### 실습 05 TodoListController의 처리
+
+* ...
 
 
 
+### JSP - EL (Expression Language
+
+* ...
+* `${ }`
+* 내가 JSTL하고 EL을 좀 해깔리고 있는 것 같다. 😓
 
 
 
+#### EL을 이용한 출력
+
+* ...
 
 
 
+### JSTL
+
+* ...
+
+* 나는 아래 내용 추가함.. (최신 3.0.1 버전을 쓰더라도 1.2 사양도 포함되어 있다.) 
+
+  ```groovy
+    implementation "jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:${jakartaServletJspJstlApiVersion}"
+    implementation "org.glassfish.web:jakarta.servlet.jsp.jstl:${jakartaServletJspJstlVersion}"
+  ```
+
+  * 처음에는 API는 포함하지 않았는데, 실제 forEach 태그 사용하려니 LoopTag 클래스 정의 안되었다고 나와서 추가함.
+  * Tomcat Lib을 확인했을 때... `jstl-api`는 제공되지 않음.  
+    * `servlet-api`, `jsp-api` 등은 있다.
+
+#### JSP 파일에서 JSTL 사용하기
+
+* JSTL 1.2 사양
+
+  ```jsp
+  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+  ```
+
+* JSTL 3.0 사양
+
+  ```jsp
+  <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+  ```
+
+  3.0을 버전으로 JSP파일에 적용해도 실제 동작을 하지만.. 아직 IntelliJ에서 3.0 사양에 대한 URI를 정상 인식하지 않는다.
+
+  * 누가 문제 있다고 이슈 등록은 했음... https://youtrack.jetbrains.com/issue/IDEA-308542
 
 
 
+### 실습 06 Todo 조회
 
+* ....
 
-
-## 
+​         
 
 ## 의견
 
-* 
+* 같은 주제로 여러가지 책을 보는게 좋은 것 같다. 👍
   
   
 
@@ -316,8 +385,6 @@
 
 * p16. 다이어그램에서 `데이터베이스`와 `서버`의 위치가 바뀌어야할 것 같다.
 * p60. 다이어그램에서 2번째 상속 단계의 클래스 명이 Generic Servlet이 되야함.
-
-
 
 
 
@@ -337,4 +404,4 @@
 
 Gretty에선 따로 저 옵션을 붙이진 않았었는데... IntelliJ 연동 톰켓의 `Tomcat Catalina 로그` 항목에서 내가 컨트롤러에 정의한 로깅 내용중 한글이 깨져서 추가해보았다..
 
-추가 후 한글안 깨지지 않았다.
+추가 후 한글이 깨지지 않았다.
