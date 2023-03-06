@@ -5,8 +5,8 @@
   <title>index</title>
 </head>
 <body>
+<h1>1장 웹 프로그래밍의 시작 - 프로젝트 인덱스 페이지</h1>
 <ul>
-  <h1>프로젝트 인덱스 페이지</h1>
   <li>
     <h4>IntelliJ 템플릿이 생성한 기본 서블릿</h4>
     <a href="hello-servlet">Hello Servlet</a>

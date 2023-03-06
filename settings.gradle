@@ -1,3 +1,4 @@
 rootProject.name = 'java-web-development-workbook-2022ed-study'
 
 include('chap01:w1')
+include('chap02:jdbcex')
