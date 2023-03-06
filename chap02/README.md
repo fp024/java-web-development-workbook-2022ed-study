@@ -84,6 +84,81 @@
 
 
 
+#### 실습_02 데이터베이스 테이블 생성
+
+* TIMESTAMP 한계가 2037년까지면 얼마 안남은것 같다..?😅 새로 만들 때는 DATETIME 사용하는 것이 나을 것 같다.
+
+* 물론 시간값이 해당 속성에 대해 전혀 무의미하면 DATE 타입이 좋음.👍
+
+  ```sql
+  CREATE TABLE tbl_todo (
+      tno         INT AUTO_INCREMENT PRIMARY KEY,
+      title       VARCHAR(100) NOT NULL,
+      dueDate     DATE NOT NULL,
+      finished    TINYINT DEFAULT 0
+  );
+  ```
+
+  
+
+#### 실습_03 데이터 insert
+
+```sql
+INSERT INTO tbl_todo (title, dueDate, finished)
+VALUES ('Test...', '2022-12-31', 1);
+```
+
+
+
+#### 실습_04 데이터 select
+
+```sql
+SELECT * FROM tbl_todo WHERE tno < 10;
+```
+
+
+
+#### 실습05 데이터 업데이트
+
+```sql
+UPDATE tbl_todo
+   SET finished = 0,
+       title = 'Not yet...'
+ WHERE tno = 3;
+```
+
+
+
+#### 실습_06 데이터 DELETE
+
+```sql
+DELETE 
+  FROM tbl_todo
+ WHERE tno > 5;
+```
+
+
+
+### DML과 쿼리(select)의 차이
+
+* DML은 몇개의 데이터가 처리되었는지 숫자로 결과 반환
+* SELECT 문은 데이터를 반환
+
+
+
+#### JDBC 프로그래밍을 위한 API와 용어들
+
+* java.sql.Connection
+* java.sql.Statement / PreparedStatement
+* java.sql.ResultSet
+* Connection Pool 과 DataSource
+* DAO (Data Access Object)
+* VO (Value Object) 혹은 엔티티(Entity)
+
+
+
+
+
   
 
 ## 의견
