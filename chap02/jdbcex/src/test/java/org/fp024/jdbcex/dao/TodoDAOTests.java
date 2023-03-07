@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.fp024.common.DBUtils;
-import org.fp024.jdbcex.TodoVO;
+import org.fp024.jdbcex.domain.TodoVO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

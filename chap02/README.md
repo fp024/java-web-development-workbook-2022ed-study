@@ -305,7 +305,42 @@ MariaDB에서도 DROP의 CASCADE는 구현되지 않은 것 같다. MySQL에서 
 
 
 
+## 2.3 웹 MVC와 JDBC의 결합
 
+* ...
+
+### ModelMapper 라이브러리
+
+* DTO는 getter / setter / toString / equals / hashCode
+
+* VO는 getter : 읽기 위주의 작업으로 사용하도록 함.
+
+  > DTO와 VO를 구분해서 사용하는 것이 좋다고 하심 👍 나도 그렇다고 생각함.
+
+* DTO `->` VO, VO `->`DTO 변환에 ModelMapper 라이브러리 사용
+
+  ```groovy
+  implementation "org.modelmapper:modelmapper:${modelMapperVersion}"
+  ```
+
+* 설정
+
+  ```java
+    MapperUtil() {
+      this.modelMapper = new ModelMapper();
+      this.modelMapper.getConfiguration() //
+          .setFieldMatchingEnabled(true) //
+          .setFieldAccessLevel(AccessLevel.PRIVATE)
+          .setMatchingStrategy(MatchingStrategies.STRICT);
+    }
+  ```
+
+  * https://modelmapper.org/user-manual/configuration/
+    * setFieldMatchingEnabled: 필드가 일치할 수 있는지 여부를 나타냅니다.
+    * setFieldAccessLevel: 접근성에 따라 일치할 수 있는 메서드 및 필드를 결정합니다.
+    * setMatchingStrategy: 소스 및 대상 토큰이 일치하는 방식을 결정합니다.
+      * STRICT: 원본 및 대상 속성과 엄격하게 일치
+      * https://modelmapper.org/user-manual/configuration/#matching-strategies
 
 
 

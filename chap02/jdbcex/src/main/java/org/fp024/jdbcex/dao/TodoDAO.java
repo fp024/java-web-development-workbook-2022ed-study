@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.Cleanup;
 import lombok.extern.slf4j.Slf4j;
-import org.fp024.jdbcex.TodoVO;
+import org.fp024.jdbcex.domain.TodoVO;
 
 @Slf4j
 public class TodoDAO {
@@ -43,8 +43,7 @@ public class TodoDAO {
     while (resultSet.next()) {
       TodoVO vo = TodoVO.builder() //
           .tno(resultSet.getLong("tno")) //
-          .title(resultSet.getString("title"))
-          .dueDate(resultSet.getDate("dueDate").toLocalDate())
+          .title(resultSet.getString("title")).dueDate(resultSet.getDate("dueDate").toLocalDate())
           .finished(resultSet.getBoolean("finished")).build();
       list.add(vo);
     }
@@ -64,10 +63,8 @@ public class TodoDAO {
 
     resultSet.next();
     TodoVO vo = TodoVO.builder() //
-        .tno(resultSet.getLong(1))
-        .title(resultSet.getString(2)) //
-        .dueDate(resultSet.getDate(3).toLocalDate())
-        .finished(resultSet.getBoolean(4)).build();
+        .tno(resultSet.getLong(1)).title(resultSet.getString(2)) //
+        .dueDate(resultSet.getDate(3).toLocalDate()).finished(resultSet.getBoolean(4)).build();
     return vo;
   }
 
