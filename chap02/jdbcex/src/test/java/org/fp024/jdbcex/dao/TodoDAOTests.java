@@ -27,12 +27,19 @@ class TodoDAOTests {
     todoDAO.insert(todoVO);
   }
 
-
   @Test
   void testList() throws Exception {
     List<TodoVO> list = todoDAO.selectAll();
 
     list.forEach(vo -> LOGGER.info(vo.toString()));
+  }
+
+  @Test
+  void testSelectOne() throws Exception {
+    Long tno = 2L;
+    TodoVO vo = todoDAO.selectOne(tno);
+
+    LOGGER.info("vo: {}", vo);
   }
 
 
