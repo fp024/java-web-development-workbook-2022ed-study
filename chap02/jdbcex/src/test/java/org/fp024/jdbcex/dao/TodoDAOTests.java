@@ -1,6 +1,8 @@
 package org.fp024.jdbcex.dao;
 
+import java.time.LocalDate;
 import lombok.extern.slf4j.Slf4j;
+import org.fp024.jdbcex.TodoVO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +15,17 @@ class TodoDAOTests {
   void ready() {
     todoDAO = new TodoDAO();
   }
+
+  @Test
+  void testInsert() throws Exception {
+    TodoVO todoVO = TodoVO.builder()
+        .title("Sample TItle...")
+        .dueDate(LocalDate.of(2021, 12, 31))
+        .build();
+
+    todoDAO.insert(todoVO);
+  }
+
 
   @Test
   void testTime() {
