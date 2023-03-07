@@ -1,6 +1,7 @@
 package org.fp024.jdbcex.dao;
 
 import java.time.LocalDate;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.fp024.jdbcex.TodoVO;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,6 +25,14 @@ class TodoDAOTests {
         .build();
 
     todoDAO.insert(todoVO);
+  }
+
+
+  @Test
+  void testList() throws Exception {
+    List<TodoVO> list = todoDAO.selectAll();
+
+    list.forEach(vo -> LOGGER.info(vo.toString()));
   }
 
 
