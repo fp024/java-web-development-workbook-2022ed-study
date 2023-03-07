@@ -370,6 +370,26 @@ MariaDB에서도 DROP의 CASCADE는 구현되지 않은 것 같다. MySQL에서 
 
 
 
+#### 실습_09 조회 기능 구현
+
+* ...
+
+* checkbox는 readonly가 제대로 안되서.. 
+
+  ```html
+  <input type="checkbox" name="finished" ${dto.finished ? "checked": ""} onclick="return false">
+  ```
+
+  onclick이 아무일도 하지 못하게 바꿈.
+
+  * disabled를 붙여도됨 이때 form 전송이 필요할 경우 별도 hidden필드를 이용해야함.
+
+* ✨ Tomcat 재시작 없이 재배포시 Hikari 종료 못했다고 에러나와서 리스너에 DataSource close()하고, JDBC드라이버 등록 해제하는 코드를 추가했음. `JDBCDriverCleaner` 참고.
+
+
+
+
+
 ## 의견
 
 * ...
