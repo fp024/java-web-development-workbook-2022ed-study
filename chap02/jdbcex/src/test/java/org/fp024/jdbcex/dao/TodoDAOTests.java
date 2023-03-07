@@ -3,6 +3,7 @@ package org.fp024.jdbcex.dao;
 import java.time.LocalDate;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
+import org.fp024.common.DBUtils;
 import org.fp024.jdbcex.TodoVO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,7 @@ class TodoDAOTests {
 
   @BeforeEach
   void ready() {
+    DBUtils.resetDB();
     todoDAO = new TodoDAO();
   }
 
@@ -36,10 +38,27 @@ class TodoDAOTests {
 
   @Test
   void testSelectOne() throws Exception {
-    Long tno = 2L;
+    Long tno = 1L;
     TodoVO vo = todoDAO.selectOne(tno);
 
     LOGGER.info("vo: {}", vo);
+  }
+
+  @Test
+  void testDeleteOne() throws Exception {
+    todoDAO.deleteOne(1L);
+  }
+
+  @Test
+  void testUpdateOne() throws Exception {
+    TodoVO vo = TodoVO.builder()
+        .tno(1L)
+        .title("Sample Title...")
+        .dueDate(LocalDate.of(2023, 3, 7))
+        .finished(true)
+        .build();
+
+    todoDAO.updateOne(vo);
   }
 
 

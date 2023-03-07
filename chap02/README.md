@@ -253,6 +253,60 @@ DELETE
 
 
 
+---
+
+#### ✨ 중간 노트 ✨
+
+테스트 할 때마다 DB를 초기화시키고 싶은데,...
+
+MariaDB에서도 DROP의 CASCADE는 구현되지 않은 것 같다. MySQL에서 해결한 방법대로 프로시저를 추가해두자.
+
+* JPA 스터디를 진행할 때, 외래키 관계가 복잡하더라도 한번에 모든 테이블을 지우기 위해서 MySQL 8에서 적용했었는데, MariaDB 10에서도 잘 동작한다.
+
+* https://github.com/fp024/introduction-to-jpa-programming-study/issues/7
+
+  ```sql
+  DROP PROCEDURE IF EXISTS `drop_all_tables`;
+  
+  DELIMITER $$
+  CREATE PROCEDURE `drop_all_tables`()
+  BEGIN
+      DECLARE _done INT DEFAULT FALSE;
+      DECLARE _tableName VARCHAR(255);
+      DECLARE _cursor CURSOR FOR
+          SELECT table_name 
+          FROM information_schema.TABLES
+          WHERE table_schema = SCHEMA();
+      DECLARE CONTINUE HANDLER FOR NOT FOUND SET _done = TRUE;
+  
+      SET FOREIGN_KEY_CHECKS = 0;
+  
+      OPEN _cursor;
+  
+      REPEAT FETCH _cursor INTO _tableName;
+  
+      IF NOT _done THEN
+          SET @stmt_sql = CONCAT('DROP TABLE ', _tableName);
+          PREPARE stmt1 FROM @stmt_sql;
+          EXECUTE stmt1;
+          DEALLOCATE PREPARE stmt1;
+      END IF;
+  
+      UNTIL _done END REPEAT;
+  
+      CLOSE _cursor;
+      SET FOREIGN_KEY_CHECKS = 1;
+  END$$
+  
+  DELIMITER ;
+  ```
+
+  ---
+
+
+
+
+
 
 
 

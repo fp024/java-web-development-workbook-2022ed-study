@@ -71,6 +71,40 @@ public class TodoDAO {
     return vo;
   }
 
+
+  public void deleteOne(Long tno) throws Exception {
+    String sql = "DELETE FROM tbl_todo WHERE ?";
+
+    @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+    @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+    preparedStatement.setLong(1, tno);
+
+    preparedStatement.executeUpdate();
+  }
+
+
+  public void updateOne(TodoVO vo) throws Exception {
+    String sql = """
+        UPDATE tbl_todo
+           SET title = ?,
+               dueDate = ?,
+               finished = ?
+         WHERE tno = ? 
+        """;
+
+    @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+    @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+    preparedStatement.setString(1, vo.getTitle());
+    preparedStatement.setDate(2, Date.valueOf(vo.getDueDate()));
+    preparedStatement.setBoolean(3, vo.isFinished());
+    preparedStatement.setLong(4, vo.getTno());
+
+    preparedStatement.executeUpdate();
+  }
+
+
   public String getTime() {
     String now = null;
 

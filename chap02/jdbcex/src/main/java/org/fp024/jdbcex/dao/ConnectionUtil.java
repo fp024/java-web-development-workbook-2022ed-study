@@ -3,11 +3,13 @@ package org.fp024.jdbcex.dao;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import java.sql.Connection;
+import lombok.Getter;
 
 public enum ConnectionUtil {
   INSTANCE;
 
-  private final HikariDataSource ds;
+  @Getter
+  private final HikariDataSource dataSource;
 
   ConnectionUtil() {
 
@@ -22,10 +24,11 @@ public enum ConnectionUtil {
     config.addDataSourceProperty("prepStmtCacheSize", "250");
     config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
 
-    ds = new HikariDataSource(config);
+    dataSource = new HikariDataSource(config);
   }
-  
+
   public Connection getConnection() throws Exception {
-    return ds.getConnection();
+    return dataSource.getConnection();
   }
+
 }
