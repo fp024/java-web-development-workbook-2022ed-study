@@ -25,14 +25,13 @@ public class TodoRegisterController extends HttpServlet {
       throws ServletException, IOException {
 
     LOGGER.info("/todo/register GET .....");
-    request.getRequestDispatcher(TODO_VIEW_ROOT + "/register.jsp") //
+    request.getRequestDispatcher(TODO_VIEW_ROOT.concat("/register.jsp")) //
         .forward(request, response);
-
   }
 
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+      throws IOException {
     TodoDTO todoDTO = TodoDTO.builder() //
         .title(request.getParameter("title"))
         .dueDate(LocalDate.parse(request.getParameter("dueDate"), DATE_FORMAT_YYYY_MM_DD)).build();

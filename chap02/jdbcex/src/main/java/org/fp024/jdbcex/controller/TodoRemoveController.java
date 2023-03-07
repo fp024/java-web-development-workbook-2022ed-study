@@ -1,6 +1,5 @@
 package org.fp024.jdbcex.controller;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,7 +16,7 @@ public class TodoRemoveController extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+      throws IOException {
 
     Long tno = Long.parseLong(request.getParameter("tno"));
     LOGGER.info("tno: {}", tno);

@@ -5,5 +5,6 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class TestConstants {
-  public static final String CONTEXT_PATH = "/jdbcex";
+
+  public static final String CONTEXT_PATH = "/";
 }

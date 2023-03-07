@@ -22,7 +22,7 @@ public class TodoModifyController extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+      throws ServletException {
 
     try {
       Long tno = Long.parseLong(request.getParameter("tno"));
@@ -39,7 +39,7 @@ public class TodoModifyController extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+      throws IOException {
 
     String finishedStr = request.getParameter("finished");
 
