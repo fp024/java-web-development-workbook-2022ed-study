@@ -70,8 +70,11 @@ public class TodoDAO {
 
 
   public void deleteOne(Long tno) throws Exception {
-    String sql = "DELETE FROM tbl_todo WHERE ?";
-
+    String sql = """
+        DELETE
+          FROM tbl_todo
+         WHERE tno = ?
+        """;
     @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
     @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
@@ -87,7 +90,7 @@ public class TodoDAO {
            SET title = ?,
                dueDate = ?,
                finished = ?
-         WHERE tno = ? 
+         WHERE tno = ?
         """;
 
     @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();

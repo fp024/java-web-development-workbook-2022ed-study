@@ -15,8 +15,8 @@ import org.fp024.jdbcex.dto.TodoDTO;
 import org.fp024.jdbcex.service.TodoService;
 
 @Slf4j
-@WebServlet(name = "todoRegisterController", value = "/todo/register")
-public class TodoRegisterController extends HttpServlet {
+@WebServlet(name = "todoModifyController", value = "/todo/modify")
+public class TodoModifyController extends HttpServlet {
 
   private final TodoService todoService = TodoService.INSTANCE;
 
@@ -24,26 +24,38 @@ public class TodoRegisterController extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    LOGGER.info("/todo/register GET .....");
-    request.getRequestDispatcher(TODO_VIEW_ROOT + "/register.jsp") //
-        .forward(request, response);
-
+    try {
+      Long tno = Long.parseLong(request.getParameter("tno"));
+      TodoDTO todoDTO = todoService.get(tno);
+      // 데이터 담기
+      request.setAttribute("dto", todoDTO);
+      request.getRequestDispatcher(TODO_VIEW_ROOT.concat("/modify.jsp")) //
+          .forward(request, response);
+    } catch (Exception e) {
+      LOGGER.error(e.getMessage(), e);
+      throw new ServletException("modify get ... error");
+    }
   }
 
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    TodoDTO todoDTO = TodoDTO.builder() //
-        .title(request.getParameter("title"))
-        .dueDate(LocalDate.parse(request.getParameter("dueDate"), DATE_FORMAT_YYYY_MM_DD)).build();
 
-    LOGGER.info("/todo/register POST ...");
+    String finishedStr = request.getParameter("finished");
+
+    TodoDTO todoDTO = TodoDTO.builder() //
+        .tno(Long.parseLong(request.getParameter("tno"))) //
+        .title(request.getParameter("title"))
+        .dueDate(LocalDate.parse(request.getParameter("dueDate"), DATE_FORMAT_YYYY_MM_DD))
+        .finished("on".equals(finishedStr)).build();
+
+    LOGGER.info("/todo/modify POST ...");
     LOGGER.info(todoDTO.toString());
 
     try {
-      todoService.register(todoDTO);
+      todoService.modify(todoDTO);
     } catch (Exception e) {
-      LOGGER.info(e.getMessage(), e);
+      LOGGER.error(e.getMessage(), e);
     }
     response.sendRedirect("/todo/list");
   }

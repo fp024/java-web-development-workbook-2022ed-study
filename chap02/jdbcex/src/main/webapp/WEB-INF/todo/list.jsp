@@ -17,6 +17,7 @@
     </li>
   </c:forEach>
 </ul>
+<a href="/todo/register">register new Todo...</a>
 
 </body>
 </html>

@@ -37,12 +37,26 @@ public enum TodoService {
         .map(vo -> modelMapper.map(vo, TodoDTO.class)).toList();
   }
 
-
   public TodoDTO get(Long tno) throws Exception {
     LOGGER.info("tno: {}", tno);
     TodoVO todoVO = dao.selectOne(tno);
     TodoDTO todoDTO = modelMapper.map(todoVO, TodoDTO.class);
     return todoDTO;
   }
+
+  public void remove(Long tno) throws Exception {
+    LOGGER.info("tno: {}", tno);
+    dao.deleteOne(tno);
+  }
+
+
+  public void modify(TodoDTO todoDTO) throws Exception {
+    LOGGER.info("todoDTO: {}", todoDTO);
+
+    TodoVO todoVO = modelMapper.map(todoDTO, TodoVO.class);
+
+    dao.updateOne(todoVO);
+  }
+
 
 }
