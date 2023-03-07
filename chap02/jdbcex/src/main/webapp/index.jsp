@@ -8,8 +8,8 @@
 <h1>2장 웹과 데이터베이스 - 프로젝트 인덱스 페이지</h1>
 <ul>
   <li>
-    <h4>...</h4>
-    <a href="#"></a>
+    <h4>todo 목록</h4>
+    <a href="/todo/list">/todo/list</a>
   </li>
 </ul>
 </body>

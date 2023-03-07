@@ -1,5 +1,6 @@
 package org.fp024.jdbcex.service;
 
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.fp024.jdbcex.dao.TodoDAO;
 import org.fp024.jdbcex.domain.TodoVO;
@@ -27,4 +28,12 @@ public enum TodoService {
     dao.insert(todoVO);
   }
 
+  public List<TodoDTO> listAll() throws Exception {
+    List<TodoVO> voList = dao.selectAll();
+
+    LOGGER.info("voList................");
+
+    return voList.stream() //
+        .map(vo -> modelMapper.map(vo, TodoDTO.class)).toList();
+  }
 }
