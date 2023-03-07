@@ -159,7 +159,77 @@ DELETE
 
 
 
-  
+## 2.2 프로젝트 내 JDBC 구현
+
+* ...
+
+### Lombok 라이브러리
+
+* ...
+
+#### Lombok 라이브러리 추가
+
+* 나는 이미 Gradle 플러그인으로 설정해서 그대로 쓰면 되겠다.
+
+  ```groovy
+  plugins {
+    ...
+    id "io.freefair.lombok" version "${lombokPluginVersion}"
+    ...
+  }
+  ```
+
+
+
+#### 실습_01 TodoVO 클래스의 작성
+
+* ...
+
+
+
+### HikariCP의 설정
+
+* ...
+
+* 디펜던시 추가
+
+  ```groovy
+    implementation "com.zaxxer:HikariCP:${hikaricpVersion}"
+  ```
+
+
+
+#### 실습_02 Connection Pool 이용하기
+
+* ...
+
+* 몇가지 데이터소스 프로퍼티 설정이 추가되어있던데... [HikariCP 홈페이지 기본 설정](https://github.com/brettwooldridge/HikariCP#rocket-initialization)대로 하신 것 같다.
+
+  * `cachePrepStmts`: `true`
+
+    > 기본적으로 캐시가 실제로 비활성화된 경우 `prepStmtCacheSize`,  `prepStmtCacheSqlLimit` 매개변수 중 어느 것도 영향을 미치지 않습니다. 이 매개변수를 `true`로 설정해야 합니다
+
+  * `prepStmtCacheSize`: `250`
+
+    > 이는 드라이버가 연결당 캐시할 준비된 명령문의 수를 설정합니다. 기본값은 보수적인 *25* 입니다 . *250-500* 사이로 설정하는 것이 좋습니다 .
+
+  * `prepStmtCacheSqlLimit`: `2048`
+
+    > 이것은 드라이버가 캐시할 준비된 SQL 문의 최대 길이입니다. MySQL 기본값은 *256* 입니다 . 우리의 경험, 특히 Hibernate와 같은 ORM 프레임워크에서 이 기본값은 생성된 명령문 길이의 임계값보다 훨씬 낮습니다. 권장 설정은 *2048* 입니다 .
+
+    * https://github.com/brettwooldridge/HikariCP/wiki/
+    * https://github.com/brettwooldridge/HikariCP/wiki/MySQL-Configuration
+
+
+
+#### TodoDAO와 `@Cleanup`
+
+* ...
+* 나는 try-with-resource 가 더 나은 것 같은데.. `@Cleanup`까지 사용하는 건, 예측이 힘들 상황이 올것 같기도하고...😅
+
+
+
+
 
 ## 의견
 
