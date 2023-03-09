@@ -17,4 +17,6 @@ public class Constants {
 
   public static final String HTML_CONTENT_TYPE =
       String.format("text/html;charset=%s", PROJECT_ENCODING);
+
+  public static final String COOKIE_NAME_VIEW_TODOS = "viewTodos";
 }
