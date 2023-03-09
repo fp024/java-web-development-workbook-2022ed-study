@@ -5,6 +5,7 @@ import static org.fp024.common.Constants.TODO_VIEW_ROOT;
 
 import jakarta.servlet.http.HttpSession;
 import org.fp024.test.support.MockHttpServletTestSupport;
+import org.fp024.w2.dto.MemberDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
@@ -33,10 +34,32 @@ class LoginControllerTest extends MockHttpServletTestSupport<LoginController> {
 
 
   @Test
-  void testLoginPost() throws Exception {
+  void testLoginSuccess() throws Exception {
     runGivenWhenThen(
         () -> {
-          request.setParameter("mid", "choi");
+          request.setParameter("mid", "user00");
+          request.setParameter("mpw", "1111");
+        },
+        () -> servlet.doPost(request, response),
+        () -> {
+          assertThat(response.getStatus()) //
+              .isEqualTo(HttpStatus.FOUND.value());
+
+          HttpSession session = request.getSession(false);
+          MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
+          assertThat(loginInfo).isEqualTo(
+              MemberDTO.builder().mid("user00").mpw("1111").mname("사용자0").build());
+          assertThat(response.getRedirectedUrl()) //
+              .isEqualTo("/todo/list");
+        }
+    );
+  }
+
+  @Test
+  void testLoginFailure() throws Exception {
+    runGivenWhenThen(
+        () -> {
+          request.setParameter("mid", "user00");
           request.setParameter("mpw", "1234");
         },
         () -> servlet.doPost(request, response),
@@ -45,10 +68,9 @@ class LoginControllerTest extends MockHttpServletTestSupport<LoginController> {
               .isEqualTo(HttpStatus.FOUND.value());
 
           HttpSession session = request.getSession(false);
-          String loginInfo = (String) session.getAttribute("loginInfo");
-          assertThat(loginInfo).isEqualTo("choi1234");
+          assertThat(session).isNull(); // 조회 결과가 없을 경우 DAO에서 이미 예외가 발생하서 Session 생성도 없다.
           assertThat(response.getRedirectedUrl()) //
-              .isEqualTo("/todo/list");
+              .isEqualTo("/login?result=error");
         }
     );
   }

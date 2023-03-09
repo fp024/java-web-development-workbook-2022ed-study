@@ -135,7 +135,47 @@
 
 
 
+#### 실습_05 자바에서 회원 데이터 처리하기
 
+* ...
+
+
+
+#### 실습_06 컨트롤러에서 로그인 연동
+
+* ...
+
+###### EL에서 스트링 처리
+
+* EL에서 기본으로 제공하는 param 객체를 이용해서 파라미터 값을 얻을 수 있음.
+
+  ```jsp
+  <c:if test="${param.result == 'error'}">
+    <h1>로그인 에러</h1>
+  </c:if>
+  ```
+
+
+
+##### EL의 Scope와 HttpSession 접근하기
+
+* HttpServletRequest에 저장된 객체를 찾을 수 없다면 HttpSession 에 저장된 객체를 찾아내는 방식으로 동작함.
+
+* EL의 스코프를 이용해서 접근하는 변수
+  * Page Scope
+  * Request Scope
+  * Session Scope
+  * Application Scope
+
+* 변수에 없는 속성으로 조회하려면 예외남.
+
+  ```
+  Caused by: jakarta.el.PropertyNotFoundException: [name] 특성이 [org.fp024.w2.dto.MemberDTO] 유형에 없습니다.
+  ```
+
+  
+
+  
 
 
 
