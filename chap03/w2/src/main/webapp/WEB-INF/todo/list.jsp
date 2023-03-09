@@ -19,5 +19,9 @@
 </ul>
 <a href="/todo/register">register new Todo...</a>
 
+<form action="/logout" method="post">
+  <button>LOGOUT</button>
+</form>
+
 </body>
 </html>

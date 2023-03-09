@@ -19,7 +19,7 @@ class LoginCheckFilterTest {
 
   private MockFilterChain chain;
 
-  LoginCheckFilter filter;
+  private LoginCheckFilter filter;
 
   @BeforeEach
   void beforeEach() {
