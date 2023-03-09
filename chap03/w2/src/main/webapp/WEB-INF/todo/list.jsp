@@ -17,8 +17,8 @@
     </li>
   </c:forEach>
 </ul>
-<a href="/todo/register">register new Todo...</a>
 
+<button type="button" onclick="location.href='/todo/register'">New Todo</button>
 <form action="/logout" method="post">
   <button>LOGOUT</button>
 </form>
