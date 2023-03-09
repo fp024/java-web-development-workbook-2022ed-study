@@ -22,9 +22,10 @@ VALUES ('Test...', '2022-12-31', 1);
 
 
 CREATE TABLE tbl_member (
-  mid  VARCHAR(50) PRIMARY KEY,
-  mpw  VARCHAR(50)  NOT NULL,
-  mname VARCHAR(100) NOT NULL
+  mid   VARCHAR(50) PRIMARY KEY,
+  mpw   VARCHAR(50)  NOT NULL,
+  mname VARCHAR(100) NOT NULL,
+  uuid  VARCHAR(50)
 );
 
 INSERT INTO tbl_member (mid, mpw, mname)

@@ -3,6 +3,7 @@ package org.fp024.w2.dao;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.fp024.common.DBUtils.resetDB;
 
+import java.util.UUID;
 import org.fp024.w2.domain.MemberVO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,5 +30,10 @@ class MemberDAOTest {
         .hasFieldOrPropertyWithValue("mid", "user00")
         .hasFieldOrPropertyWithValue("mpw", "1111")
         .hasFieldOrPropertyWithValue("mname", "사용자0");
+  }
+
+  @Test
+  void testUpdateUuid() throws Exception {
+    dao.updateUuid("user00", UUID.randomUUID().toString());
   }
 }

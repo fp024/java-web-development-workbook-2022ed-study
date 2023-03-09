@@ -19,4 +19,6 @@ public class Constants {
       String.format("text/html;charset=%s", PROJECT_ENCODING);
 
   public static final String COOKIE_NAME_VIEW_TODOS = "viewTodos";
+
+  public static final String COOKIE_NAME_REMEMBER_ME = "remember-me";
 }

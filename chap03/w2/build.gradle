@@ -19,7 +19,7 @@ ext {
 sourceCompatibility = "${javaVersion}"
 targetCompatibility = "${javaVersion}"
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
   options.encoding = "${projectEncoding}"
 }
 

@@ -1,16 +1,21 @@
 package org.fp024.w2.filter;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.fp024.common.Constants.COOKIE_NAME_REMEMBER_ME;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.UUID;
+import org.fp024.w2.dto.MemberDTO;
+import org.fp024.w2.service.MemberService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.mock.web.MockFilterChain;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.mock.web.MockHttpSession;
 
 class LoginCheckFilterTest {
 
@@ -43,14 +48,31 @@ class LoginCheckFilterTest {
   }
 
   @Test
-  void testDoFilter_Login() throws ServletException, IOException {
+  void testDoFilter_SessionLogin() throws Exception {
     // given
-    MockHttpSession session = new MockHttpSession();
-    session.setAttribute("loginInfo", "park1234");
-    request.setSession(session);
+    // 서버측에도 자동 로그인 UUID정보를 미리 넣어주자.
+    final String testUUID = UUID.randomUUID().toString();
+    MemberService.INSTANCE.updateUuid("user00", testUUID);
+
+    Cookie cookie = new Cookie(COOKIE_NAME_REMEMBER_ME, testUUID);
+    request.setCookies(cookie);
+
     // when
     filter.doFilter(request, response, chain);
+
     // then
+    HttpSession session = request.getSession(false);
+
+    assertThat(session).isNotNull();
+
+    MemberDTO memberDTO = (MemberDTO) session.getAttribute("loginInfo");
+
+    assertThat(memberDTO) //
+        .hasFieldOrPropertyWithValue("mid", "user00")
+        .hasFieldOrPropertyWithValue("uuid", testUUID);
+
+    assertThat(session.getAttribute("loginInfo"));
+
     assertThat(response.getStatus()) //
         .isNotEqualTo(HttpStatus.FOUND.value());
   }
