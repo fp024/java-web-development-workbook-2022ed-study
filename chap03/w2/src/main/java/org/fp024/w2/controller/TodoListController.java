@@ -2,6 +2,7 @@ package org.fp024.w2.controller;
 
 import static org.fp024.common.Constants.TODO_VIEW_ROOT;
 
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -23,6 +24,9 @@ public class TodoListController extends HttpServlet {
       throws ServletException {
 
     LOGGER.info("todo list....................");
+
+    ServletContext servletContext = request.getServletContext();
+    LOGGER.info("appName: {}", servletContext.getAttribute("appName"));
 
     try {
       List<TodoDTO> dtoList = todoService.listAll();
