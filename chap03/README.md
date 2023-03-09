@@ -78,6 +78,50 @@
 
 
 
+### 필터를 이용한 로그인 체크
+
+* ...
+* Filter에서 init(), destroy()가 default라서 필수 구현이 아님. 
+
+
+
+#### 실습_03 로그인 체크 구현
+
+* ...
+
+* sendRedirect() 이후 바로 return으로 끝내지 않고 계속 진행해버리면.. (아래에서 `return;`을 빼먹으면...)
+
+  ```java
+     if (session.getAttribute("loginInfo") == null) {
+        resp.sendRedirect("/login");
+        return; // 끝내는것이 중요. 다음 필터로 넘기면 안 됨.
+      }
+  ```
+
+  다음과 같은 예외가 발생함.
+
+  ```
+  java.lang.IllegalStateException: 응답이 이미 커밋된 후에는 forward할 수 없습니다.
+  	at org.apache.catalina.core.ApplicationDispatcher.doForward(ApplicationDispatcher.java:285) ~[catalina.jar:10.1.7]
+  	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:277) ~[catalina.jar:10.1.7]
+  	at org.fp024.w2.controller.TodoListController.doGet(TodoListController.java:31) [classes/:?]
+  ```
+
+  sendRedirect로 응답 주소가 정해졌는데.. TodoListController 까지 들어가서 forward코드를 만날때 예외가 나는 것 같다.
+
+  ```java
+        request.getRequestDispatcher(TODO_VIEW_ROOT.concat("/list.jsp")) //
+            .forward(request, response); // 예외 발생
+  ```
+
+  
+
+
+
+
+
+
+
 
 
 ## 의견
