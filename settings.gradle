@@ -3,3 +3,4 @@ rootProject.name = 'java-web-development-workbook-2022ed-study'
 include('chap01:w1')
 include('chap02:jdbcex')
 include('chap03:w2')
+include('chap04:springex')

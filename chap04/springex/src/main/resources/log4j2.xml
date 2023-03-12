@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Configuration>
+<Configuration>
+  <Appenders>
+    <Console name="console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
+    </Console>
+  </Appenders>
+  <Loggers>
+
+    <Logger name="org.springframework" level="INFO" additivity="false">
+      <AppenderRef ref="console"/>
+    </Logger>
+
+    <Logger name="org.fp024" level="INFO" additivity="false">
+      <AppenderRef ref="console"/>
+    </Logger>
+
+    <Root level="INFO" additivity="false">
+      <AppenderRef ref="console"/>
+    </Root>
+  </Loggers>
+</Configuration>
