@@ -118,6 +118,21 @@ lombok.copyableAnnotations += org.springframework.beans.factory.annotation.Quali
 
 
 
+### 웹 프로젝트를 위한 스프링 준비
+
+* ...
+
+
+
+#### 실습_05 DataSource 구성하기
+
+* ...
+* root-context.xml에 HikariCP 설정하기
+  * ...
+* 
+
+
+
 
 
 
