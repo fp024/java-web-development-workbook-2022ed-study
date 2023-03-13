@@ -169,6 +169,14 @@ lombok.copyableAnnotations += org.springframework.beans.factory.annotation.Quali
 
 
 
+#### 실습_02 XML로 SQL 분리하기
+
+* ...
+
+  
+
+
+
 
 
 ## 의견

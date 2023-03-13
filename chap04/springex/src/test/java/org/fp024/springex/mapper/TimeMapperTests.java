@@ -11,10 +11,19 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 @SpringJUnitConfig(locations = "file:src/main/webapp/WEB-INF/root-context.xml")
 class TimeMapperTests {
 
-  @Autowired(required = false) private TimeMapper timeMapper;
+  @Autowired(required = false)
+  private TimeMapper timeMapper;
+
+  @Autowired(required = false)
+  private TimeMapper2 timeMapper2;
 
   @Test
   void testGetTime() {
     LOGGER.info("{}", timeMapper.getTime());
+  }
+
+  @Test
+  void testGetNow() {
+    LOGGER.info("{}", timeMapper2.getNow());
   }
 }
