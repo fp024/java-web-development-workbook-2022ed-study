@@ -129,9 +129,43 @@ lombok.copyableAnnotations += org.springframework.beans.factory.annotation.Quali
 * ...
 * root-context.xml에 HikariCP 설정하기
   * ...
-* 
 
 
+
+
+
+## 4.2 MyBatis와 스프링 연동
+
+* ...
+
+### MyBatis 소개
+
+* ...
+
+#### MyBatis와 스프링의 연동 방식
+
+* MyBatis로 단독으로 개발하고 스프링에서 DAO를 작성해서 처리하는 방식
+* MyBatis와 스프링을 연동하고 Mapper 인터페이스만 이용하는 방식
+
+
+
+* MyBatis를 위한 라이브러리 들
+  * 스프링 관련: spring-jdbc, spring-tx
+  * MyBatis관련: mybatis, mybatis-spring
+
+
+
+* MyBatis를 위한 스프링의 설정 - SessionFactory
+  * ...
+
+
+
+#### 실습_01 Mapper 인터페이스 활용하기
+
+* ...
+* IntelliJ의 경고를 피하기 위해 Mapper 인터페이스의 `@Autowired` required 속성을 false로 설정하는 내용이 있어서... 요즘 해결되었나 찾아봤는데... 왠지 해결할 우선순위가 그다지 높은 것 같지 않음. . 😓
+  * https://youtrack.jetbrains.com/issue/IDEA-210302/Spring-Mybatis-Unsupported-tag-mybatis-springscan-for-namespace-http-mybatis.org-schema-mybatis-spring
+  * `@MapperScan` 붙인 설정클래스 일부러 만들어서 해봣을 때도 안됨 😓 왠지 안해주기로 한듯 😂
 
 
 
